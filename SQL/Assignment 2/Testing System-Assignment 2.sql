@@ -1,8 +1,9 @@
 -- Create database testingmanagement
+drop database testingmanagement;
 CREATE DATABASE IF NOT EXISTS TestingManagement;
 USE TestingManagement;
 
--- Create all table of database
+-- Create table with constraint and datatype
 CREATE TABLE IF NOT EXISTS Department (
     DepartmentID INT AUTO_INCREMENT PRIMARY KEY,
     DepartmentName NVARCHAR(50) NOT NULL UNIQUE KEY
@@ -34,11 +35,12 @@ CREATE TABLE IF NOT EXISTS `Group` (
 );
 
 CREATE TABLE IF NOT EXISTS GroupAccount (
-	GruopID INT AUTO_INCREMENT ,
+	GroupID INT AUTO_INCREMENT ,
 	AccountID INT NOT NULL,
 	JoinDate DATE DEFAULT (CURRENT_DATE),
-    PRIMARY KEY(GruopID, AccountID),
-    FOREIGN KEY(AccountID) REFERENCES `Account`(AccountID) ON DELETE CASCADE
+    PRIMARY KEY(GroupID, AccountID),
+    FOREIGN KEY(AccountID) REFERENCES `Account`(AccountID) ON DELETE CASCADE,
+    FOREIGN KEY(GroupID) REFERENCES `Group`(GroupID) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS TypeQuestion (
