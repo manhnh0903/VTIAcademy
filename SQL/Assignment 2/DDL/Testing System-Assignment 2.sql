@@ -1,4 +1,4 @@
--- Create database testingmanagement
+
 drop database testingmanagement;
 CREATE DATABASE IF NOT EXISTS TestingManagement;
 USE TestingManagement;
