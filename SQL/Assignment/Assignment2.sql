@@ -1,9 +1,10 @@
--- Add another comment
+-- new comment for A&B
 -- Create database testingmanagement
 DROP DATABASE IF EXISTS testingmanagement;
 CREATE DATABASE IF NOT EXISTS TestingManagement;
 USE TestingManagement;
 
+-- sdsadsadasdas
 -- Create table with constraint and datatype
 DROP TABLE IF EXISTS Department;
 CREATE TABLE IF NOT EXISTS Department (
