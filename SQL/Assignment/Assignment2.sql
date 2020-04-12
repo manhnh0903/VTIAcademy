@@ -1,3 +1,4 @@
+-- add comment here
 -- Create database testingmanagement
 DROP DATABASE IF EXISTS testingmanagement;
 CREATE DATABASE IF NOT EXISTS TestingManagement;
