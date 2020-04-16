@@ -1,7 +1,7 @@
--- Create database testingmanagement
-DROP DATABASE IF EXISTS testingmanagement;
-CREATE DATABASE IF NOT EXISTS TestingManagement;
-USE TestingManagement;
+-- Create database TestingSystem
+DROP DATABASE IF EXISTS TestingSystem;
+CREATE DATABASE IF NOT EXISTS TestingSystem;
+USE TestingSystem;
 
 -- Create table with constraint and datatype
 DROP TABLE IF EXISTS Department;
@@ -33,8 +33,9 @@ DROP TABLE IF EXISTS `Group`;
 CREATE TABLE IF NOT EXISTS `Group` (
     GroupID TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     GroupName NVARCHAR(50) NOT NULL UNIQUE KEY,
-    CreatorID TINYINT NOT NULL UNIQUE KEY,
-    CreateDate DATE NOT NULL
+    CreatorID TINYINT UNSIGNED NOT NULL,
+    CreateDate DATE NOT NULL,
+    FOREIGN KEY (CreatorID) REFERENCES `Account`(AccountID) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS GroupAccount;
@@ -62,13 +63,14 @@ CREATE TABLE IF NOT EXISTS CategoryQuestion (
 DROP TABLE IF EXISTS Question;
 CREATE TABLE IF NOT EXISTS Question (
     QuestionID TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    Content NVARCHAR(50) NOT NULL,
+    Content NVARCHAR(500) NOT NULL,
     CategoryID TINYINT UNSIGNED NOT NULL,
     TypeID TINYINT UNSIGNED NOT NULL,
     CreatorID TINYINT UNSIGNED NOT NULL UNIQUE KEY,
     CreateDate DATE NOT NULL,
     FOREIGN KEY(TypeID) REFERENCES TypeQuestion(TypeID) ON DELETE CASCADE,
-    FOREIGN KEY(CategoryID) REFERENCES CategoryQuestion(CategoryID) ON DELETE CASCADE
+    FOREIGN KEY(CategoryID) REFERENCES CategoryQuestion(CategoryID) ON DELETE CASCADE,
+    FOREIGN KEY(CreatorID) REFERENCES `Account`(AccountID) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS Answer;
@@ -89,29 +91,32 @@ CREATE TABLE IF NOT EXISTS Exam (
     Duration TINYINT UNSIGNED NOT NULL,
     CreatorID TINYINT UNSIGNED NOT NULL,
     CreateDate DATE NOT NULL,
-    FOREIGN KEY(CategoryID) REFERENCES CategoryQuestion(CategoryID) ON DELETE CASCADE
+    FOREIGN KEY(CategoryID) REFERENCES CategoryQuestion(CategoryID) ON DELETE CASCADE,
+    FOREIGN KEY(CreatorID) REFERENCES `Account`(AccountID) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS ExamQuestion;
 CREATE TABLE IF NOT EXISTS ExamQuestion (
-    ExamID TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    ExamID TINYINT UNSIGNED NOT NULL,
     QuestionID TINYINT UNSIGNED NOT NULL,
-    FOREIGN KEY(QuestionID) REFERENCES Question(QuestionID) ON DELETE CASCADE
+    PRIMARY KEY(ExamID, QuestionID),
+    FOREIGN KEY(QuestionID) REFERENCES Question(QuestionID) ON DELETE CASCADE,
+    FOREIGN KEY(ExamID) REFERENCES Exam(ExamID) ON DELETE CASCADE
 );
 
 -- Question 1: Thêm 10 bản ghi vào mỗi bảng
 
 INSERT INTO Department 			(DepartmentName)
-VALUES							('Accounting department'),
+VALUES							('Accounting '),
 								('Sale'),
-								('Administration department'),
-								('Human Resources department'),
-								('Customer Service department'),
-								('Financial department'),
-								('Research & Development department'),
-								('Quality department'),
-								('Training department'),
-								('Marketing department');
+								('Administration '),
+								('Human Resources '),
+								('Customer Service '),
+								('Financial '),
+								('Research & Development '),
+								('Quality '),
+								('Training '),
+								('Marketing  ');
     
 INSERT INTO `Position` 			(PositionName)
 VALUES							('Director'),
@@ -147,7 +152,12 @@ VALUES							('Group1',					3,						'2018-06-20'),
 								('Group7',					4,						'2018-05-07'),
 								('Group8',					1,						'2019-07-04'),
 								('Group9',					7,						'2020-02-28'),
-								('Group10',					9,						'2019-03-07');
+								('Group10',					9,						'2019-03-07'),
+								('Group11',					3,						'2019-01-07'),
+								('Group12',					4,						'2019-11-07'),
+								('Group13',					7,						'2019-03-03'),
+								('Group14',					6,						'2019-06-09'),
+								('Group15',					6,						'2019-07-01');
 						
 INSERT INTO GroupAccount 		(GroupID,		AccountID,        	JoinDate)
 VALUES							(1,			     1,   				'2018-06-05'),
@@ -198,15 +208,18 @@ VALUES							('q1',				1,				3,				4,			'2018-05-05'	),
 
 INSERT INTO Answer 				(Content,			QuestionID,		IsCorrect	)
 VALUES							('Content1',			7,				'y'		),
-								('Content2',			4,				'y'		),
+								('Content2',			5,				'y'		),
 								('Content3',			8,				'y'		),
 								('Content4',			2,				'n'		),
 								('Content5',			6,				'y'		),
 								('Content6',			9,				'n'		),
 								('Content7',			10,				'n'		),
 								('Content8',			7,				'y'		),
-								('Content9',			1,				'n'		),
-								('Content10',			5,				'n'		);
+								('Content9',			2,				'n'		),
+								('Content11',			5,				'n'		),
+                                ('Content12',			6,				'y'		),
+                                ('Content13',			10,				'y'		),
+                                ('Content14',			5,				'n'		);
 
 INSERT INTO Exam 				( `Code`,		Title,		CategoryID,		Duration,		CreatorID,		CreateDate)
 VALUES							('Code1',		'java',			3,			70,					3,			'2018-06-05'),
@@ -220,17 +233,17 @@ VALUES							('Code1',		'java',			3,			70,					3,			'2018-06-05'),
 								('Code9',		'front-en',		6,			75,					6,			'2020-01-11'),
 								('Code10',		'back-end',		8,			60,					2,			'2020-03-09');
 
-INSERT INTO ExamQuestion 		(QuestionID)
-VALUES							(	3	),
-								(	4	),
-								(	7	),
-								(	1	),
-								(	5	),
-								(	10	),
-								(	2	),
-								(	6	),
-								(	8	),
-								(	7	);
+INSERT INTO ExamQuestion 		(ExamID,	QuestionID)
+VALUES							(	3,        	7),
+								(	4,			9),
+								(	7, 			10), 
+								(	1, 			3),
+								(	5, 			5),
+								(	10, 		1),
+								(	2, 			2),
+								(	6, 			4),
+								(	8, 			6),
+								(	7, 			8);
 
 
 

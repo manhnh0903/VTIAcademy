@@ -1,6 +1,6 @@
 -- ASSIGNMENT 3--
 
-USE TestingManagement;
+USE TestingSystem;
 
 -- Question 2: Lấy tất cả các phòng ban
 
@@ -11,8 +11,8 @@ FROM 	department;
 
 SELECT 	DepartmentID 
 FROM 	Department 
-WHERE 	DepartmentName 
-LIKE 	'%Sale%';
+WHERE 	DepartmentName = 'Sale';
+-- LIKE 	'%Sale%';
 
 -- Question 4: lấy ra thông tin account có full name dài nhất và sắp xếp chúng theo thứ tự giảm dần
 
@@ -25,7 +25,8 @@ ORDER BY 	Fullname DESC;
 
 SELECT 		* 
 FROM 		`Account` 
-WHERE 		LENGTH(Fullname) = (SELECT MAX(LENGTH(Fullname)) FROM `Account`) 
+WHERE 		LENGTH(Fullname) = (SELECT MAX(LENGTH(Fullname)) 
+								FROM `Account`) 
 AND 		DepartmentID = 3
 ORDER BY 	Fullname DESC;
 
