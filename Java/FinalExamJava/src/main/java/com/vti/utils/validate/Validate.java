@@ -1,7 +1,5 @@
 package com.vti.utils.validate;
 
-import java.util.regex.Pattern;
-
 import com.mysql.cj.util.StringUtils;
 import com.vti.utils.constant.Constant;
 import com.vti.utils.messageUtil.MessageUtil;
@@ -113,23 +111,11 @@ public class Validate {
 		}
 
 		// regular expression
-		
-		String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-
-//		Pattern pattern = Pattern.compile(regex);
-//
-//		Matcher matcher = pattern.matcher(input);
-		return Pattern.compile(regex).matcher(input).matches();
-		
-//		return Pattern.compile(regular).matcher(input).matches();
-//		
-//		boolean result = MethodUtil.checkRegularExpression(input, Constant.PATTERN_EMAIL);
-//		if (!result) {
-//			showError(MessageUtil.VALIDATE_EMAIL_RULE);
-//		}
-//		return result;
-
-//		return true;
+		boolean result = MethodUtil.checkRegularExpression(input, Constant.PATTERN_EMAIL);
+		if (!result) {
+			showError(MessageUtil.VALIDATE_EMAIL_RULE);
+		}
+		return result;
 	}
 
 	/**
@@ -188,14 +174,14 @@ public class Validate {
 			return false;
 		}
 
-//		// regular expression
-//		boolean result = MethodUtil.checkRegularExpression(input, Constant.PATTERN_PHONE);
-//		if (!result) {
-//			showError(MessageUtil.VALIDATE_PHONE_RULE);
-//		}
-//		return result;
+		// regular expression
+		boolean result = MethodUtil.checkRegularExpression(input, Constant.PATTERN_PHONE);
+		if (!result) {
+			showError(MessageUtil.VALIDATE_PHONE_RULE);
+		}
+		return result;
 
-		return true;
+//		return true;
 
 	}
 

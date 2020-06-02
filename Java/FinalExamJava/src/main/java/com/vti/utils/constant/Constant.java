@@ -1,7 +1,7 @@
 package com.vti.utils.constant;
 
 /**
- * This class is Constant. 
+ * This class is Constant.
  * 
  * @Description: .
  * @author: N.H.Mạnh
@@ -46,15 +46,26 @@ public class Constant {
 	public static final String ERROR_VALIDATE_STRING = "Invalid value, Please input string: ";
 
 	// validate by regular expression
-	public static final String PATTERN_EMAIL = "^[\\\\w!#$%&’*+/=?`{|}~^-]+(?:\\\\.[\\\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$";
-	public static final String PATTERN_PASSWORD = "[A-z0-9@#$!^&%* `\\\\/-_]{6,12}";
+	public static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	public static final String PATTERN_PASSWORD = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?=\\S+$).{6,12}$";
+	
+//	This regex will enforce these rules:
+//
+//		At least one upper case English letter, (?=.*?[A-Z])
+//		At least one lower case English letter, (?=.*?[a-z])
+//		At least one digit, (?=.*?[0-9])
+//		At least one special character, (?=.*?[#?!@$%^&*-])
+//	    No whitespace allowed in the entire string
+//		Minimum eight in length .{8,} (with the anchors)
+	
 	public static final String PATTERN_STRING = "[A-z0-9]{1,}";
 	public static final String PATTERN_DATE = "\\d{4}-[01]";
-	public static final String PATTERN_PHONE = "^[0-9]{9,12}$";
-
+	public static final String PATTERN_PHONE = "^(\\+\\d{1,3}( )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$";
+	
 	// firstName
 	public static final String PATTERN_FIRSTNAME = "[A-Z][a-z]*";
-	
+
 	// lastName
 	public static final String PATTERN_LASTNAME = "[A-Z]+([ '-][a-zA-Z]+)*";
 

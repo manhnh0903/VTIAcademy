@@ -36,22 +36,6 @@ public class MethodUtil {
 			return false;
 		}
 		// validate success
-//		String regex = "[A-z0-9@#$!^&%* `\\\\/-_]{9,12}";
-//
-//		Pattern pattern = Pattern.compile(regex);
-//
-//		Matcher matcher = pattern.matcher(input);
-//		return Pattern.compile(regex).matcher(input).matches();
-//		String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-//
-//		Pattern pattern = Pattern.compile(regex);
-//
-//		Matcher matcher = pattern.matcher(input);
-//		if (matcher.matches()) {
-//			return false;
-//		}
-//		;
-//		return true;
 		return Pattern.compile(regular).matcher(input).matches();
 	}
 }
